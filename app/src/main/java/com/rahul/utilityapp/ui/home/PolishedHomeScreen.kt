@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.DeleteOutline
@@ -25,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -76,19 +76,19 @@ fun HomeScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp),
-        contentPadding = PaddingValues(top = 24.dp, bottom = 32.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(horizontal = 16.dp),
+        contentPadding = PaddingValues(top = 20.dp, bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(
                     text = "Utility Hub",
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineMedium
                 )
                 Text(
                     text = "One place for today's weather snapshot and the reminders you do not want to miss.",
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
@@ -102,8 +102,8 @@ fun HomeScreen(
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(18.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -113,11 +113,11 @@ fun HomeScreen(
                         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             Text(
                                 text = "Singapore weather",
-                                style = MaterialTheme.typography.titleLarge
+                                style = MaterialTheme.typography.titleMedium
                             )
                             Text(
                                 text = "Live conditions from Open-Meteo",
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
@@ -134,7 +134,7 @@ fun HomeScreen(
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(96.dp),
+                                    .height(88.dp),
                                 contentAlignment = Alignment.Center
                             ) {
                                 CircularProgressIndicator()
@@ -148,17 +148,17 @@ fun HomeScreen(
                                 color = MaterialTheme.colorScheme.primary
                             )
 
-                            Column(
+                            Row(
                                 modifier = Modifier.fillMaxWidth(),
-                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
                             ) {
                                 WeatherMetric(
-                                    modifier = Modifier.fillMaxWidth(),
+                                    modifier = Modifier.weight(1f),
                                     label = "Temperature",
                                     value = "${weather.current_weather.temperature.toInt()} C"
                                 )
                                 WeatherMetric(
-                                    modifier = Modifier.fillMaxWidth(),
+                                    modifier = Modifier.weight(1f),
                                     label = "Wind speed",
                                     value = "${weather.current_weather.windspeed.toInt()} km/h"
                                 )
@@ -168,7 +168,7 @@ fun HomeScreen(
                         errorMessage != null -> {
                             Text(
                                 text = errorMessage,
-                                style = MaterialTheme.typography.bodyMedium,
+                                style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.error
                             )
                         }
@@ -176,7 +176,7 @@ fun HomeScreen(
                         else -> {
                             Text(
                                 text = "Weather data is not available right now.",
-                                style = MaterialTheme.typography.bodyMedium
+                                style = MaterialTheme.typography.bodySmall
                             )
                         }
                     }
@@ -192,16 +192,16 @@ fun HomeScreen(
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(18.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
                         text = "Create reminder",
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.titleMedium
                     )
                     Text(
                         text = "Schedule a local reminder for errands, classes, or study tasks.",
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
@@ -217,7 +217,7 @@ fun HomeScreen(
                         text = selectedTime?.let {
                             "Scheduled for ${dateFormatter.format(Date(it))}"
                         } ?: "No date and time selected yet.",
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
@@ -270,92 +270,113 @@ fun HomeScreen(
         }
 
         item {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "Upcoming reminders",
-                    style = MaterialTheme.typography.titleLarge
-                )
-                Text(
-                    text = "${reminders.size} saved",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-        }
-
-        if (reminders.isEmpty()) {
-            item {
-                OutlinedCard(modifier = Modifier.fillMaxWidth()) {
-                    Column(
-                        modifier = Modifier.padding(18.dp),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Text(
-                            text = "No reminders yet",
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                        Text(
-                            text = "Add one above and it will stay on this device until you remove it.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
-            }
-        }
-
-        items(
-            items = reminders,
-            key = { "${it.text}-${it.time}" }
-        ) { reminder ->
             ElevatedCard(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.elevatedCardColors(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(18.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(
-                        modifier = Modifier.padding(end = 12.dp),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 10.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = reminder.text,
+                            text = "Saved reminders",
                             style = MaterialTheme.typography.titleMedium
                         )
                         Text(
-                            text = dateFormatter.format(Date(reminder.time)),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            text = "${reminders.size} saved",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
-                    IconButton(
-                        onClick = {
-                            reminderVM.deleteReminder(reminder)
-                            AlarmHelper.cancelReminder(
-                                context = context,
-                                text = reminder.text,
-                                triggerTime = reminder.time
-                            )
+
+                    if (reminders.isEmpty()) {
+                        OutlinedCard(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 16.dp, end = 16.dp, bottom = 16.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(14.dp),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(
+                                    text = "No reminders yet",
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                                Text(
+                                    text = "Your saved reminders will appear here.",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.DeleteOutline,
-                            contentDescription = "Delete reminder"
-                        )
+                    } else {
+                        reminders.forEachIndexed { index, reminder ->
+                            ReminderRow(
+                                reminder = reminder,
+                                dateFormatter = dateFormatter,
+                                onDelete = {
+                                    reminderVM.deleteReminder(reminder)
+                                    AlarmHelper.cancelReminder(
+                                        context = context,
+                                        text = reminder.text,
+                                        triggerTime = reminder.time
+                                    )
+                                }
+                            )
+
+                            if (index != reminders.lastIndex) {
+                                HorizontalDivider(
+                                    modifier = Modifier.padding(horizontal = 16.dp),
+                                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.45f)
+                                )
+                            }
+                        }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun ReminderRow(
+    reminder: Reminder,
+    dateFormatter: SimpleDateFormat,
+    onDelete: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            modifier = Modifier.padding(end = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Text(
+                text = reminder.text,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = dateFormatter.format(Date(reminder.time)),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+        IconButton(onClick = onDelete) {
+            Icon(
+                imageVector = Icons.Default.DeleteOutline,
+                contentDescription = "Delete reminder"
+            )
         }
     }
 }
@@ -368,12 +389,12 @@ private fun WeatherMetric(
 ) {
     OutlinedCard(modifier = modifier) {
         Column(
-            modifier = Modifier.padding(14.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelLarge,
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(

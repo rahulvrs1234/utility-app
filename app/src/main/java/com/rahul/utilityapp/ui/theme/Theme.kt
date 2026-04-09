@@ -44,22 +44,22 @@ private val DarkColors = darkColorScheme(
     outline = DarkOutline
 )
 
-private val PurpleColors = darkColorScheme(
+private val PurpleColors = lightColorScheme(
     primary = PurplePrimary,
     onPrimary = Color.White,
-    primaryContainer = Color(0xFF45206B),
+    primaryContainer = Color(0xFFECD9FF),
     onPrimaryContainer = PurpleText,
     secondary = PurpleSecondary,
-    onSecondary = Color(0xFF2A133F),
-    secondaryContainer = Color(0xFF4D2673),
+    onSecondary = PurpleText,
+    secondaryContainer = Color(0xFFF1E5FF),
     onSecondaryContainer = PurpleText,
-    tertiary = Color(0xFFF0ABFC),
+    tertiary = Color(0xFFDFA2FF),
     background = PurpleBackground,
     onBackground = PurpleText,
     surface = PurpleSurface,
     onSurface = PurpleText,
     surfaceVariant = PurpleSurfaceVariant,
-    onSurfaceVariant = Color(0xFFE0D0F5),
+    onSurfaceVariant = Color(0xFF6F5A86),
     outline = PurpleOutline
 )
 

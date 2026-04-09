@@ -6,15 +6,15 @@ enum class AppThemeMode(
 ) {
     Light(
         title = "Light",
-        description = "Bright and clean for daytime use."
+        description = "Bright and clean."
     ),
     Dark(
         title = "Dark",
-        description = "Calm contrast for late-night use."
+        description = "Calm for late-night use."
     ),
     Purple(
         title = "Purple",
-        description = "A richer look with a softer purple mood."
+        description = "Soft purple mood."
     );
 
     companion object {

@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
@@ -36,19 +36,19 @@ fun SettingsScreen(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 20.dp),
-        contentPadding = PaddingValues(top = 24.dp, bottom = 32.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(horizontal = 16.dp),
+        contentPadding = PaddingValues(top = 20.dp, bottom = 24.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(
                     text = "Settings",
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineMedium
                 )
                 Text(
                     text = "Keep the app comfortable to use and easy to trust.",
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
@@ -60,30 +60,20 @@ fun SettingsScreen(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(18.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Column(
-                        modifier = Modifier.padding(end = 16.dp),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Text(
-                            text = "Appearance",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                        Text(
-                            text = "Choose the look that feels best each time you open the app.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                }
+                    Text(
+                        text = "Appearance",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Text(
+                        text = "Pick Light, Dark, or Purple.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
 
-                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     AppThemeMode.values().forEach { option ->
                         ThemeOptionButton(
                             themeMode = option,
@@ -102,16 +92,16 @@ fun SettingsScreen(
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(18.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     Text(
                         text = "Notifications",
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.titleMedium
                     )
                     Text(
                         text = "Reminders are scheduled with the device alarm service and shown through a local notification channel.",
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -125,16 +115,16 @@ fun SettingsScreen(
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(18.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     Text(
                         text = "About Utility Hub",
-                        style = MaterialTheme.typography.titleLarge
+                        style = MaterialTheme.typography.titleMedium
                     )
                     Text(
                         text = "The app combines a compact weather snapshot with personal reminders that stay on-device. Weather data comes from Open-Meteo.",
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
@@ -150,26 +140,19 @@ fun SettingsScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(18.dp),
+                        .padding(horizontal = 16.dp, vertical = 14.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(
-                            text = "For U HSB",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                        Text(
-                            text = "A small purple note, kept close.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
+                    Text(
+                        text = "For HSB",
+                        style = MaterialTheme.typography.titleMedium
+                    )
                     Icon(
                         imageVector = Icons.Default.Favorite,
                         contentDescription = "Purple heart",
                         tint = PurpleHeart,
-                        modifier = Modifier.size(28.dp)
+                        modifier = Modifier.size(24.dp)
                     )
                 }
             }
@@ -189,21 +172,21 @@ private fun ThemeOptionButton(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(
                     text = themeMode.title,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
                     text = themeMode.description,
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodySmall
                 )
             }
             if (selected) {
-                Spacer(modifier = Modifier.size(12.dp))
                 Icon(
                     imageVector = Icons.Default.CheckCircle,
-                    contentDescription = null
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -212,14 +195,20 @@ private fun ThemeOptionButton(
     if (selected) {
         Button(
             onClick = onClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary
+            )
         ) {
             buttonContent()
         }
     } else {
         OutlinedButton(
             onClick = onClick,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(horizontal = 14.dp, vertical = 10.dp)
         ) {
             buttonContent()
         }

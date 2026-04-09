@@ -8,37 +8,42 @@ import androidx.compose.ui.unit.sp
 val UtilityTypography = Typography(
     headlineLarge = TextStyle(
         fontWeight = FontWeight.Bold,
-        fontSize = 34.sp,
-        lineHeight = 40.sp
+        fontSize = 30.sp,
+        lineHeight = 36.sp
     ),
     headlineMedium = TextStyle(
         fontWeight = FontWeight.Bold,
-        fontSize = 28.sp,
-        lineHeight = 34.sp
+        fontSize = 26.sp,
+        lineHeight = 32.sp
     ),
     titleLarge = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 22.sp,
-        lineHeight = 28.sp
+        fontSize = 19.sp,
+        lineHeight = 24.sp
     ),
     titleMedium = TextStyle(
         fontWeight = FontWeight.SemiBold,
-        fontSize = 18.sp,
-        lineHeight = 24.sp
+        fontSize = 17.sp,
+        lineHeight = 22.sp
     ),
     bodyLarge = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp
+        fontSize = 15.sp,
+        lineHeight = 22.sp
     ),
     bodyMedium = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        lineHeight = 20.sp
+        fontSize = 13.sp,
+        lineHeight = 18.sp
+    ),
+    bodySmall = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 16.sp
     ),
     labelLarge = TextStyle(
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
-        lineHeight = 20.sp
+        fontSize = 13.sp,
+        lineHeight = 18.sp
     )
 )
