@@ -54,9 +54,7 @@ app/src/main/java/com/rahul/utilityapp
 
 ## Screenshots
 
-![Home screen](home_screen.png.jpeg)
-![Settings screen](settings_screen.png.jpeg)
-![Dark mode](dark_mode.png.jpeg)
+
 
 ## Notes
 
