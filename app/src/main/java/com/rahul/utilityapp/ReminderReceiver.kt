@@ -1,38 +1,31 @@
 package com.rahul.utilityapp
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import com.rahul.utilityapp.utils.NotificationHelper
 
 class ReminderReceiver : BroadcastReceiver() {
-
     override fun onReceive(context: Context, intent: Intent?) {
-
         val text = intent?.getStringExtra("REMINDER_TEXT") ?: "Reminder"
+        NotificationHelper.createChannel(context)
 
-        val channelId = "reminder_channel"
-
-        val channel = NotificationChannel(
-            channelId,
-            "Reminder Notifications",
-            NotificationManager.IMPORTANCE_HIGH
+        val notification = NotificationCompat.Builder(
+            context,
+            NotificationHelper.CHANNEL_ID
         )
-
-        val manager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE)
-                    as NotificationManager
-
-        manager.createNotificationChannel(channel)
-
-        val notification = NotificationCompat.Builder(context, channelId)
-            .setContentTitle("Reminder")
+            .setContentTitle("Utility Hub reminder")
             .setContentText(text)
             .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
             .build()
 
-        manager.notify(System.currentTimeMillis().toInt(), notification)
+        NotificationManagerCompat.from(context).notify(
+            System.currentTimeMillis().toInt(),
+            notification
+        )
     }
 }

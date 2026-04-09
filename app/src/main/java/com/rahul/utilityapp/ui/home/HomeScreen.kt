@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
-fun HomeScreen() {
+fun LegacyHomeScreen() {
 
     val context = LocalContext.current
     val weatherVM: WeatherViewModel = viewModel()

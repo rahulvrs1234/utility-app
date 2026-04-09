@@ -8,7 +8,6 @@ import com.rahul.utilityapp.data.repository.WeatherRepository
 import kotlinx.coroutines.launch
 
 class WeatherViewModel : ViewModel() {
-
     private val repository = WeatherRepository()
 
     var weather = mutableStateOf<WeatherResponse?>(null)
@@ -17,25 +16,28 @@ class WeatherViewModel : ViewModel() {
     var isLoading = mutableStateOf(false)
         private set
 
+    var errorMessage = mutableStateOf<String?>(null)
+        private set
+
     init {
-        fetchWeather()
+        refreshWeather()
     }
 
-    private fun fetchWeather() {
+    fun refreshWeather() {
+        if (isLoading.value) return
 
         viewModelScope.launch {
+            isLoading.value = true
+            errorMessage.value = null
 
             try {
-                isLoading.value = true
-
                 weather.value =
                     repository.getWeather(
                         latitude = 1.3521,
                         longitude = 103.8198
                     )
-
-            } catch (e: Exception) {
-                e.printStackTrace()
+            } catch (_: Exception) {
+                errorMessage.value = "Unable to refresh weather right now."
             }
 
             isLoading.value = false
